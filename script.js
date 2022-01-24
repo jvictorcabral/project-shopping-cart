@@ -1,5 +1,3 @@
-const classItems = document.querySelector('.items')
-
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -28,11 +26,11 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
 
 const showProductList = async () => {
   const items = await fetchProducts('computador');
-  const section = document.querySelector('.items')
+  const section = document.querySelector('.items');
   items.results.forEach((element) => {
-    section.appendChild(createProductItemElement(element))
+    section.appendChild(createProductItemElement(element));
   });
-}
+};
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
