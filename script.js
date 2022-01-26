@@ -1,6 +1,25 @@
 // quem me ajudou e ensinou a fazer foi o Gabriel Mendes. (Dica do Atanes no momento de ajuda de recuperacao sobre esse projeto)
 
+const cart = document.querySelector('.cart');
 const cartSection = document.querySelector('.cart__items');
+
+const totalPrice = document.createElement('h2');
+totalPrice.className = 'total-price';
+cart.appendChild(totalPrice);
+
+let totalValue = Number(localStorage.getItem('price'));
+
+const addValue = (price) => {
+  totalValue += price;
+  localStorage.setItem('price', totalValue);
+  totalPrice.innerHTML = `${totalValue}`;
+}
+ 
+const subtractValue = (price) => {
+  totalValue -= price;
+  localStorage.setItem('price', totalValue);
+  totalPrice.innerHTML = `${totalValue}`;
+}
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -50,6 +69,7 @@ const createCartItemElement = ({ id: sku, title: name, price: salePrice }) => {
 
 const addOnCart = async (id) => {
   const selectedElement = await fetchItem(id);
+   addValue(selectedElement.price);
   cartSection.appendChild(createCartItemElement(selectedElement));
   saveCartItems(cartSection.innerHTML);
 };
@@ -67,5 +87,6 @@ const buttonaddOnCart = async () => {
 window.onload = async () => {
   await showProductList();
   cartSection.innerHTML = getSavedCartItems('cartItems');
-  buttonaddOnCart();
+ buttonaddOnCart();
+ totalPrice.innerHTML = Number(localStorage.getItem('price'));
 };
