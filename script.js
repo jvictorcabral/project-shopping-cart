@@ -3,6 +3,11 @@
 const cart = document.querySelector('.cart');
 const cartSection = document.querySelector('.cart__items');
 
+const loading = document.createElement('p');
+loading.className = 'loading';
+loading.innerHTML = 'carregando...';
+cart.appendChild(loading);
+
 const totalPrice = document.createElement('h2');
 totalPrice.className = 'total-price';
 cart.appendChild(totalPrice);
@@ -91,6 +96,7 @@ const buttonaddOnCart = async () => {
 window.onload = async () => {
   await showProductList();
   cartSection.innerHTML = getSavedCartItems('cartItems');
+  cart.removeChild(loading);
  buttonaddOnCart();
  totalPrice.innerHTML = Number(localStorage.getItem('price'));
 };
