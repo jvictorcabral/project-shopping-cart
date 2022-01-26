@@ -13,13 +13,13 @@ const addValue = (price) => {
   totalValue += price;
   localStorage.setItem('price', totalValue);
   totalPrice.innerHTML = `${totalValue}`;
-}
+};
  
 const subtractValue = (price) => {
   totalValue -= price;
   localStorage.setItem('price', totalValue);
   totalPrice.innerHTML = `${totalValue}`;
-}
+};
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -55,6 +55,10 @@ const showProductList = async () => {
 };
 
 const cartItemClickListener = ({ target }) => {
+  const element = target.innerHTML.split(' ');
+  const deletePrice = element[element.length - 1];
+  const deleteNumbers = deletePrice.substring(1);
+  subtractValue(Number(deleteNumbers));
   cartSection.removeChild(target);
   saveCartItems(cartSection.innerHTML);
 };
