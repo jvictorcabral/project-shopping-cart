@@ -3,7 +3,7 @@
 const cart = document.querySelector('.cart');
 const cartSection = document.querySelector('.cart__items');
 
-const loading = document.createElement('p');
+const loading = document.createElement('span');
 loading.className = 'loading';
 loading.innerHTML = 'carregando...';
 cart.appendChild(loading);
