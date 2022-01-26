@@ -1,4 +1,4 @@
-// quem me ajudou e ensinou a fazer foi o Gabriel Mendes. (Dica do Atanes no momento de ajuda sobre esse projeto)
+// quem me ajudou e ensinou a fazer foi o Gabriel Mendes. (Dica do Atanes no momento de ajuda de recuperacao sobre esse projeto)
 
 const cartSection = document.querySelector('.cart__items');
 
@@ -36,10 +36,6 @@ const showProductList = async () => {
 };
 
 const cartItemClickListener = ({ target }) => {
-  const element = target.innerHTML.split(' ');
-  const deletePrice = element[element.length - 1];
-  const deleteNumbers = deletePrice.substring(1);
-  subtractValue(Number(deleteNumbers));
   cartSection.removeChild(target);
   saveCartItems(cartSection.innerHTML);
 };
