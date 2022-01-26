@@ -1,3 +1,5 @@
+// quem me ajudou e ensinou a fazer foi o Gabriel Mendes. (Dica do Atanes no momento de ajuda sobre esse projeto)
+
 const cartSection = document.querySelector('.cart__items');
 
 const createProductImageElement = (imageSource) => {
@@ -5,14 +7,14 @@ const createProductImageElement = (imageSource) => {
   img.className = 'item__image';
   img.src = imageSource;
   return img;
-}
+};
 
 const createCustomElement = (element, className, innerText) => {
   const e = document.createElement(element);
   e.className = className;
   e.innerText = innerText;
   return e;
-}
+};
 
 const createProductItemElement = ({ id: sku, title: name, thumbnail: image }) => {
   const section = document.createElement('section');
@@ -23,7 +25,7 @@ const createProductItemElement = ({ id: sku, title: name, thumbnail: image }) =>
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return section;
-}
+};
 
 const showProductList = async () => {
   const data = await fetchProducts('computador');
@@ -31,7 +33,7 @@ const showProductList = async () => {
   data.results.forEach((computer) => {
     itemSection.appendChild(createProductItemElement(computer));
   });
-}
+};
 
 const cartItemClickListener = ({ target }) => {
   const element = target.innerHTML.split(' ');
@@ -40,7 +42,7 @@ const cartItemClickListener = ({ target }) => {
   subtractValue(Number(deleteNumbers));
   cartSection.removeChild(target);
   saveCartItems(cartSection.innerHTML);
-}
+};
 
 const createCartItemElement = ({ id: sku, title: name, price: salePrice }) => {
   const li = document.createElement('li');
@@ -48,13 +50,13 @@ const createCartItemElement = ({ id: sku, title: name, price: salePrice }) => {
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
   return li;
-}
+};
 
 const addOnCart = async (id) => {
   const selectedElement = await fetchItem(id);
   cartSection.appendChild(createCartItemElement(selectedElement));
   saveCartItems(cartSection.innerHTML);
-}
+};
 
 const buttonaddOnCart = async () => {
   const addButtons = document.querySelectorAll('.item__add');
@@ -64,7 +66,7 @@ const buttonaddOnCart = async () => {
       addOnCart(data.results[index].id);
     });
   });
-}
+};
 
 window.onload = async () => {
   await showProductList();
