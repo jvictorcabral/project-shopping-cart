@@ -14,6 +14,17 @@ cart.appendChild(totalPrice);
 
 let totalValue = Number(localStorage.getItem('price'));
 
+const delButton = document.createElement('button');
+delButton.className = 'empty-cart';
+delButton.innerHTML = 'Esvaziar carrinho';
+cart.appendChild(delButton);
+
+delButton.addEventListener('click', () => {
+  totalPrice.innerHTML = 0;
+  cartSection.innerHTML = '';
+  totalValue = 0;
+});
+
 const addValue = (price) => {
   totalValue += price;
   localStorage.setItem('price', totalValue);
@@ -97,6 +108,6 @@ window.onload = async () => {
   await showProductList();
   cartSection.innerHTML = getSavedCartItems('cartItems');
   cart.removeChild(loading);
- buttonaddOnCart();
- totalPrice.innerHTML = Number(localStorage.getItem('price'));
+  buttonaddOnCart();
+  totalPrice.innerHTML = Number(localStorage.getItem('price'));
 };
